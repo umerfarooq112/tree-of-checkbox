@@ -1,60 +1,78 @@
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <form>
-      <div class="bg-gray-500">
-        <label for="parentName">Parent Read</label>
-        <input type="checkbox" name="parentName" id="parent" />
-    
-        <div class="child-content bg-gray-300">
-          <label for="childRead">Child Read</label>
-          <input type="checkbox" name="childRead" class="sd" />
-      
-       
-          <label for="childRead">Child Read</label>
-          <input type="checkbox" name="childRead" class="sd" />
-       
-      
-          <label for="childRead">Child Read</label>
-          <input type="checkbox" name="childRead" class="sd" />
-   
-      </div>
+        <div class="bg-gray-500">
+            <label for="parentName">Parent Read</label>
+            <input type="checkbox" name="parentName" id="parent-1" />
+
+            <div class="child-content bg-gray-300">
+                <label for="childRead">Child Read</label>
+                <input type="checkbox" name="childRead" class="sd" />
+
+
+                <label for="childRead">Child Read</label>
+                <input type="checkbox" name="childRead" class="sd" />
+
+
+                <label for="childRead">Child Read</label>
+                <input type="checkbox" name="childRead" class="sd" />
+
+            </div>
     </form>
-  </body>
-  <script>
+</body>
+<script>
     var getCheckbox = document.querySelectorAll('.sd')
-    var getParentCheckbox = document.getElementById('parent')
-    getParentCheckbox.addEventListener('click',(event)=>SelectAllCheckbox(event))
-    function SelectAllCheckbox(event) 
-    {
-        
+    var getParentCheckbox = document.getElementById('parent-1')
+    getParentCheckbox.addEventListener('click', (event) => SelectAllCheckbox(event))
+    function SelectAllCheckbox(event) {
+        console.log(event.target.id)
         for (var i = 0; i < getCheckbox.length; i++) {
 
-                 
-                    getCheckbox[i].checked = event.target.checked
 
-                
-        
-    }
-}
- 
+            getCheckbox[i].checked = event.target.checked
 
-    function checkCheckboxChange()
-    {
-        console.log('chekbox change')
+
+
+        }
     }
-    for (var i = 0; i < getCheckbox.length; i--) {
-    (function () {
-     
-        getCheckbox[i].addEventListener("click", checkCheckboxChange )
-    }()); // immediate invocation
-}
-  </script>
+
+
+    function checkCheckboxChange() {
+        var checkboxes = document.querySelectorAll('input[type=checkbox][class=sd]:checked')
+        console.log(checkboxes, 'are checkboxes')
+        if (checkboxes.length === 3) {
+            console.log(checkboxes.length, 'true')
+            getParentCheckbox.indeterminate = false
+            getParentCheckbox.checked = true
+        }
+        else if (checkboxes.length == 0) {
+            console.log('false')
+            getParentCheckbox.indeterminate = false
+            getParentCheckbox.checked = false
+        }
+        else {
+            getParentCheckbox.indeterminate = true
+            getParentCheckbox.checked = false
+        }
+
+
+    }
+    for (var i = 0; i < getCheckbox.length; i++) {
+
+
+        getCheckbox[i].addEventListener("click", checkCheckboxChange)
+
+    }
+
+</script>
+
 </html>
-
